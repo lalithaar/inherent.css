@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="indigo">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inherent.css — Classless Semantic Modern CSS Framework</title>
+  <meta name="description" content="Write plain HTML without adding a single class: get automatic light/dark mode, 1-token color branding, and responsive layouts out of the box.">
+  <link rel="stylesheet" href="dist/inherent.min.css">
+  <style>
+    .hero {
+      text-align: center;
+      padding-block: 2.5rem 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin-bottom: 0.5rem;
+    }
+    .hero .tagline {
+      font-size: 1.15rem;
+      max-width: 60ch;
+      margin-inline: auto;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .hero .byline {
+      margin-top: 0.75rem;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+    .cdn-box {
+      background: var(--surface-2);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1.25rem;
+      margin: 1.75rem auto 0;
+      max-width: 68ch;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+    }
+    .cdn-box code {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.85rem;
+      color: var(--fg);
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .theme-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--surface-1);
+      border: 1px solid var(--border-strong);
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius-md);
+      margin-block: 2rem;
+    }
+    .theme-chip {
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--fg);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .theme-chip.active {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary);
+      font-weight: 600;
+    }
+    .color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== HEADER & HERO ==================== -->
+  <header class="wide">
+    <div class="hero">
+      <h1>Inherent.css</h1>
+      <p class="tagline">
+        Write plain HTML without adding a single class: get automatic light/dark mode, 1-token color branding, and responsive layouts out of the box.
+      </p>
+      <p class="byline">
+        Built out of pure retinal self-defense against AI purple gradients by <a href="https://isrl.in/" target="_blank" rel="noopener">lalithaar</a>.
+      </p>
+
+      <div class="cdn-box">
+        <code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent-css/dist/inherent.min.css"&gt;</code>
+        <button type="button" onclick="navigator.clipboard.writeText('<link rel=\'stylesheet\' href=\'https://cdn.jsdelivr.net/npm/inherent-css/dist/inherent.min.css\'>'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000);">Copy</button>
+      </div>
+    </div>
+
+    <!-- Live Palette Switcher -->
+    <div class="theme-toolbar">
+      <strong>Live Theme Palette:</strong>
+      <button type="button" class="theme-chip active" onclick="setTheme('indigo', this)">
+        <span class="color-dot" style="background: #6366f1;"></span> Indigo
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('emerald', this)">
+        <span class="color-dot" style="background: #10b981;"></span> Emerald
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('rose', this)">
+        <span class="color-dot" style="background: #f43f5e;"></span> Rose
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('amber', this)">
+        <span class="color-dot" style="background: #f59e0b;"></span> Amber
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('cyan', this)">
+        <span class="color-dot" style="background: #06b6d4;"></span> Cyan
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('violet', this)">
+        <span class="color-dot" style="background: #8b5cf6;"></span> Violet
+      </button>
+      <button type="button" class="theme-chip" onclick="setTheme('neutral', this)">
+        <span class="color-dot" style="background: currentColor;"></span> Neutral
+      </button>
+      <div style="display: inline-flex; align-items: center; gap: 0.4rem; margin-left: auto;">
+        <label for="custom-theme-picker" style="font-size: 0.85rem; margin: 0; display: inline-flex; flex-direction: row; align-items: center; gap: 0.4rem;">
+          Custom Seed:
+          <input type="color" id="custom-theme-picker" value="#6366f1" onchange="setCustomTheme(this.value)" style="width: 2.2rem; height: 1.8rem; padding: 2px;">
+        </label>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="wide">
+      <strong>Inherent.css</strong>
+      <ul>
+        <li><a href="#overview" aria-current="page">Overview</a></li>
+        <li><a href="#topology">Topology</a></li>
+        <li><a href="#provisioning">Provisioning</a></li>
+        <li><a href="#telemetry">Telemetry</a></li>
+        <li><a href="#actions">Actions</a></li>
+        <li><a href="https://github.com/lalithaar/inherent.css" target="_blank" rel="noopener">GitHub &rarr;</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="wide">
+    <!-- ==================== INTRO ARTICLE ==================== -->
+    <article id="overview">
+      <header>
+        <h1>Platform Release 4.12 &bull; Regional Overview</h1>
+        <p><small>Unified telemetry, automated scaling, and cross-region consensus monitor.</small></p>
+      </header>
+
+      <p>
+        All core clusters across North American and European availability zones are operating within nominal thresholds. 
+        Automated workload rebalancing has successfully completed across all edge proxies, maintaining consistent 
+        response latency with zero recorded packet drops over the past 48 hours.
+      </p>
+
+      <aside>
+        <strong>Scheduled Maintenance Notice:</strong> Primary cluster database indexing will commence 
+        this Sunday at 03:00 UTC. Secondary read replicas will seamlessly serve all application queries during the operation.
+      </aside>
+
+      <footer>
+        <small>Cluster Status: Healthy &bull; Environment: Production-US-East &bull; Build: #8492</small>
+      </footer>
+    </article>
+
+    <!-- ==================== TOPOLOGY & LAYOUTS ==================== -->
+    <section id="topology">
+      <h2>Fleet Overview &amp; Topologies</h2>
+      <p>Multi-zone distribution, capacity projections, and active fleet workloads.</p>
+
+      <h3>Real-time Platform Metrics</h3>
+      <div class="grid-4">
+        <article style="margin: 0; text-align: center;">
+          <small>Active Workloads</small>
+          <h3 style="margin: 0.25rem 0; color: var(--primary);">14,820</h3>
+          <small style="color: var(--success);">&uarr; 18.2% this week</small>
+        </article>
+        <article style="margin: 0; text-align: center;">
+          <small>Monthly Throughput</small>
+          <h3 style="margin: 0.25rem 0; color: var(--primary);">92,450 req/s</h3>
+          <small style="color: var(--success);">&uarr; 7.4% vs baseline</small>
+        </article>
+        <article style="margin: 0; text-align: center;">
+          <small>Packet Loss</small>
+          <h3 style="margin: 0.25rem 0; color: var(--primary);">0.04%</h3>
+          <small style="color: var(--muted);">&mdash; Within SLA</small>
+        </article>
+        <article style="margin: 0; text-align: center;">
+          <small>Edge Latency</small>
+          <h3 style="margin: 0.25rem 0; color: var(--primary);">18ms</h3>
+          <small style="color: var(--success);">&darr; 4ms optimized</small>
+        </article>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Service Tiers</h3>
+      <div class="grid-3">
+        <article style="margin: 0;">
+          <h4>Standard Cluster</h4>
+          <p>Shared compute resources suitable for staging and preview branches.</p>
+          <p><strong>$49</strong> / month</p>
+          <button type="button" style="width: 100%;">Provision Standard</button>
+        </article>
+        <article style="margin: 0; border-color: var(--primary);">
+          <h4>Dedicated VPC</h4>
+          <p>Isolated nodes with automated horizontal auto-scaling and priority routing.</p>
+          <p><strong>$249</strong> / month</p>
+          <button type="submit" style="width: 100%;">Upgrade to Dedicated</button>
+        </article>
+        <article style="margin: 0;">
+          <h4>Global Enterprise</h4>
+          <p>Multi-region active-active replication with custom encryption keys.</p>
+          <p><strong>Custom</strong></p>
+          <button type="button" style="width: 100%;">Contact Solutions</button>
+        </article>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Infrastructure Topology</h3>
+      <div class="sidebar-left">
+        <aside style="margin: 0;">
+          <strong>Workspace Navigation</strong>
+          <ul style="padding-left: 1.25rem; margin-top: 0.5rem;">
+            <li><a href="#clusters">Clusters</a></li>
+            <li><a href="#deployments">Deployments</a></li>
+            <li><a href="#access">Access Control</a></li>
+            <li><a href="#audits">Security Audits</a></li>
+            <li><a href="#routing">DNS Routing</a></li>
+          </ul>
+        </aside>
+
+        <article style="margin: 0;">
+          <header>
+            <h4>Primary Ingress Controller</h4>
+            <small>Directing traffic across all European and North American gateway pods.</small>
+          </header>
+          <p>
+            The ingress controller dynamically balances socket connections based on upstream queue depth 
+            and instance health checks. When compute saturation exceeds 80%, auxiliary nodes are automatically attached.
+          </p>
+          <div class="split">
+            <div>
+              <label>Target Service
+                <input type="text" value="api-gateway-edge">
+              </label>
+            </div>
+            <div>
+              <label>Active Branch
+                <input type="text" value="production-release">
+              </label>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <h3 style="margin-top: 2rem;">Workload Configuration Manifest</h3>
+      <div class="sidebar-right">
+        <article style="margin: 0;">
+          <header>
+            <h4>Container Specification</h4>
+            <small>Active deployment configuration deployed on the primary cluster.</small>
+          </header>
+          <p>
+            Configuration parameters verified against security policy guidelines.
+          </p>
+          <pre><code>{
+  "service": "ingress-proxy-v4",
+  "replicas": 16,
+  "cpu_allocation": "2000m",
+  "memory_limit": "4Gi",
+  "strategy": "RollingUpdate",
+  "health_check": {
+    "path": "/healthz",
+    "interval_seconds": 5
+  }
+}</code></pre>
+        </article>
+
+        <aside style="margin: 0; border-inline-start: none; border-inline-end: 4px solid var(--primary); border-radius: var(--radius-md) 0 0 var(--radius-md);">
+          <strong>Cluster Metadata</strong>
+          <ul style="padding-left: 1.25rem; margin-top: 0.5rem; font-size: var(--font-size-sm);">
+            <li><strong>Active Nodes:</strong> 64 nodes</li>
+            <li><strong>Uptime:</strong> 99.98%</li>
+            <li><strong>Region:</strong> us-east-1a</li>
+            <li><strong>Last Health Check:</strong> Just now</li>
+          </ul>
+          <hr style="margin: 1rem 0;">
+          <button type="button" style="width: 100%; font-size: var(--font-size-sm);">Download Report</button>
+        </aside>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ==================== DOCUMENTATION & STANDARDS ==================== -->
+    <section>
+      <h2>Operational Standards &amp; Directives</h2>
+      <p>Standard architectural guidelines and runbook specifications.</p>
+
+      <h1>Header Section Alpha</h1>
+      <h2>Header Section Beta</h2>
+      <h3>Header Section Gamma</h3>
+      <h4>Header Section Delta</h4>
+      <h5>Header Section Epsilon</h5>
+      <h6>Header Section Zeta</h6>
+
+      <hr>
+
+      <p>
+        System engineers must verify all <a href="#topology">network ingress routes</a> and 
+        ensure compliance with <a href="#provisioning">security protocols</a>.
+        Review all <strong>critical pathways</strong>, <em>provisional tags</em>, and <mark>flagged audit alerts</mark>. 
+        Deprecated services are marked as <del>legacy v1 protocol</del> and replaced with <ins>v2 gRPC stream</ins>.
+      </p>
+
+      <p>
+        Press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> or <kbd>Cmd</kbd> + <kbd>K</kbd> to open the global command palette.
+      </p>
+
+      <blockquote>
+        "Simplicity is prerequisite for reliability. Complex architectures inevitably fail in complex, unpredicted ways."
+        <cite>Systems Architecture Review Board</cite>
+      </blockquote>
+
+      <pre><code>// Example telemetry client initialization
+const client = new TelemetryClient({
+  endpoint: "https://telemetry.acme-cloud.internal",
+  batchSize: 250,
+  flushIntervalMs: 1000
+});
+await client.connect();</code></pre>
+    </section>
+
+    <hr>
+
+    <!-- ==================== PROVISIONING ==================== -->
+    <section id="provisioning">
+      <h2>Resource Provisioning &amp; Credentials</h2>
+      <p>Submit cluster provisioning parameters and assign resource allocations.</p>
+
+      <form onsubmit="event.preventDefault();">
+        <fieldset>
+          <legend>Administrator Profile</legend>
+
+          <label>
+            Full Name
+            <input type="text" placeholder="e.g. Jane Doe" required>
+          </label>
+
+          <label>
+            Corporate Email
+            <input type="email" placeholder="jane@acme-systems.internal" required>
+          </label>
+
+          <label>
+            Target Environment
+            <select>
+              <option value="us-east">US-East (Primary Production)</option>
+              <option value="eu-central">EU-Central (Frankfurt)</option>
+              <option value="ap-south">AP-South (Mumbai)</option>
+            </select>
+          </label>
+
+          <label>
+            Deployment Notes
+            <textarea placeholder="Describe the purpose of this cluster allocation..."></textarea>
+          </label>
+        </fieldset>
+
+        <fieldset>
+          <legend>Resource Quotas &amp; Policies</legend>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; align-items: center;">
+            <label>
+              Compute Saturation Limit
+              <input type="range" min="0" max="100" value="80">
+            </label>
+
+            <label>
+              Upload Service Key
+              <input type="file">
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+            <label>
+              <input type="checkbox" checked>
+              Automated Failover
+            </label>
+
+            <label>
+              <input type="checkbox">
+              Enforce Strict TLS 1.3
+            </label>
+
+            <label>
+              <input type="radio" name="sla" checked>
+              High Availability (99.99%)
+            </label>
+
+            <label>
+              <input type="radio" name="sla">
+              Standard SLA (99.9%)
+            </label>
+          </div>
+        </fieldset>
+
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+          <button type="submit">Deploy Cluster</button>
+          <button type="button">Save Draft</button>
+          <button type="reset">Clear Form</button>
+          <button type="button" disabled>Decommission (Locked)</button>
+        </div>
+      </form>
+    </section>
+
+    <hr>
+
+    <!-- ==================== TELEMETRY ==================== -->
+    <section id="telemetry">
+      <h2>Regional Node Capacities</h2>
+
+      <table>
+        <caption>Regional Infrastructure Node Distribution</caption>
+        <thead>
+          <tr>
+            <th>Cluster Name</th>
+            <th>Region</th>
+            <th>Provisioned Nodes</th>
+            <th>Health Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>helios-east-01</code></td>
+            <td>us-east-1 (N. Virginia)</td>
+            <td>64</td>
+            <td>Nominal</td>
+          </tr>
+          <tr>
+            <td><code>helios-west-02</code></td>
+            <td>us-west-2 (Oregon)</td>
+            <td>32</td>
+            <td>Nominal</td>
+          </tr>
+          <tr>
+            <td><code>helios-eu-01</code></td>
+            <td>eu-central-1 (Frankfurt)</td>
+            <td>48</td>
+            <td>Nominal</td>
+          </tr>
+          <tr>
+            <td><code>helios-ap-01</code></td>
+            <td>ap-south-1 (Mumbai)</td>
+            <td>24</td>
+            <td>Nominal</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3">Total Fleet Capacity</td>
+            <td>168 active nodes</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <h3>Capacity Indicators</h3>
+      <p>Overall Cluster Saturation:</p>
+      <progress value="68" max="100"></progress>
+
+      <p style="margin-top: 1rem;">Resource Utilization Meters:</p>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <meter value="0.9" min="0" max="1" low="0.3" high="0.7" optimum="0.8"></meter>
+        <meter value="0.5" min="0" max="1" low="0.3" high="0.7" optimum="0.8"></meter>
+        <meter value="0.2" min="0" max="1" low="0.3" high="0.7" optimum="0.8"></meter>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- ==================== ACTIONS & DIALOGS ==================== -->
+    <section id="actions">
+      <h2>Operational Actions</h2>
+
+      <details open>
+        <summary>Automated Backup Schedules</summary>
+        <p>Snapshots are persisted incrementally every 6 hours across secondary object storage tiers with 30-day retention.</p>
+      </details>
+
+      <div style="margin-block: 1.5rem;">
+        <button type="button" onclick="document.getElementById('demo-modal').showModal()">
+          Promote Image to Production
+        </button>
+      </div>
+
+      <dialog id="demo-modal">
+        <h3>Confirm Production Promotion</h3>
+        <p>
+          You are about to promote container build #8492 into production. This will initiate 
+          an automated rolling deployment across all 168 nodes.
+        </p>
+        <form method="dialog" style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.5rem;">
+          <button type="button" onclick="document.getElementById('demo-modal').close()">Cancel</button>
+          <button type="submit">Confirm &amp; Deploy</button>
+        </form>
+      </dialog>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="wide">
+    <p>
+      Inherent.css &bull; Built out of pure retinal self-defense against AI purple gradients by <a href="https://isrl.in/" target="_blank" rel="noopener">lalithaar</a> &bull; Licensed under MIT
+    </p>
+  </footer>
+
+  <script>
+    function setTheme(name, btn) {
+      document.documentElement.dataset.theme = name;
+      document.documentElement.style.removeProperty('--theme');
+      document.querySelectorAll('.theme-chip').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    function setCustomTheme(color) {
+      delete document.documentElement.dataset.theme;
+      document.documentElement.style.setProperty('--theme', color);
+      document.querySelectorAll('.theme-chip').forEach(b => b.classList.remove('active'));
+    }
+  </script>
+
+</body>
+</html>

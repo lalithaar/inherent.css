@@ -1,0 +1,34 @@
+{
+  "name": "inherent-css",
+  "version": "1.0.0",
+  "description": "Write plain HTML without adding a single class: get automatic light/dark mode, 1-token color branding, and responsive layouts out of the box.",
+  "main": "dist/inherent.css",
+  "style": "dist/inherent.css",
+  "unpkg": "dist/inherent.min.css",
+  "jsdelivr": "dist/inherent.min.css",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "css",
+    "classless",
+    "semantic",
+    "minimal",
+    "color-mix",
+    "oklch",
+    "dark-mode",
+    "responsive",
+    "zero-class"
+  ],
+  "author": "lalithaar <https://isrl.in/>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lalithaar/inherent.css.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lalithaar/inherent.css/issues"
+  },
+  "homepage": "https://lalithaar.github.io/inherent.css/"
+}
