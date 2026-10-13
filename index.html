@@ -134,6 +134,11 @@
           <input type="color" id="custom-theme-picker" value="#6366f1" onchange="setCustomTheme(this.value)" style="width: 2.2rem; height: 1.8rem; padding: 2px;">
         </label>
       </div>
+
+      <div id="a11y-panel" style="width: 100%; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
+        <span id="a11y-status">Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG AA Compliant</strong></span>
+        <button type="button" id="a11y-fix-btn" style="display: none; padding: 0.25rem 0.65rem; font-size: 0.8rem;" onclick="applyAccessibleFix()">Auto-Tune to Accessible</button>
+      </div>
     </div>
 
     <!-- Navigation -->
@@ -523,20 +528,69 @@ await client.connect();</code></pre>
     </p>
   </footer>
 
+  <script src="dist/cm-colors.global.js"></script>
   <script>
+    const themeColors = {
+      indigo: '#6366f1',
+      emerald: '#10b981',
+      rose: '#f43f5e',
+      amber: '#f59e0b',
+      cyan: '#06b6d4',
+      violet: '#8b5cf6',
+      neutral: '#333333'
+    };
+
+    let suggestedColor = null;
+
+    function checkContrastForColor(colorHex) {
+      if (!window.CMColors) return;
+
+      const bg = '#ffffff'; // check against standard light canvas
+      const result = window.CMColors.makeReadable(colorHex, bg, { large: true });
+      const statusEl = document.getElementById('a11y-status');
+      const btnEl = document.getElementById('a11y-fix-btn');
+
+      if (result.originalContrast >= 3.0) {
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG Compliant (${result.originalContrast}:1 contrast)</strong>`;
+        btnEl.style.display = 'none';
+        suggestedColor = null;
+      } else {
+        suggestedColor = result.color;
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--danger);">&#9888; Low Contrast (${result.originalContrast}:1 vs 3.0:1 requirement)</strong>`;
+        btnEl.innerText = `Auto-Tune to ${result.color} (${result.finalContrast}:1)`;
+        btnEl.style.display = 'inline-flex';
+      }
+    }
+
+    function applyAccessibleFix() {
+      if (suggestedColor) {
+        setCustomTheme(suggestedColor);
+      }
+    }
+
     function setTheme(name, btn) {
       document.documentElement.dataset.theme = name;
       document.documentElement.style.removeProperty('--theme');
       document.querySelectorAll('.theme-chip').forEach(b => b.classList.remove('active'));
       if (btn) btn.classList.add('active');
+
+      const color = themeColors[name] || '#6366f1';
+      document.getElementById('custom-theme-picker').value = color;
+      checkContrastForColor(color);
     }
 
     function setCustomTheme(color) {
       delete document.documentElement.dataset.theme;
       document.documentElement.style.setProperty('--theme', color);
+      document.getElementById('custom-theme-picker').value = color;
       document.querySelectorAll('.theme-chip').forEach(b => b.classList.remove('active'));
+      checkContrastForColor(color);
     }
-  </script>
 
+    // Initial check
+    window.addEventListener('DOMContentLoaded', () => {
+      checkContrastForColor('#6366f1');
+    });
+  </script>
 </body>
 </html>
