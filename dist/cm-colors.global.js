@@ -1,5 +1,5 @@
 /*!
- * cm-colors v1.1.0 (JS/TS Port)
+ * cm-colors v1.1.1 (JS/TS Port)
  * Accessible Color Science Library
  * Authored by Lalitha A R (https://isrl.in/)
  * Licensed under GPL-3.0
@@ -1859,15 +1859,33 @@ var CMColors = (() => {
   var make_readable_bulk = makeReadableBulk;
 
   // src/index.js
-  var version = "1.1.0";
-  var __version__ = "1.1.0";
+  var version = "1.1.1";
+  var __version__ = "1.1.1";
   function makeReadable(textColor, bgColor, options = {}) {
-    const large = options.large || false;
+    const large = Boolean(options.large);
     const pair = new ColorPair(textColor, bgColor, large);
     const [fixedColor, success] = pair.makeReadable(options);
+    const originalContrast = calculateContrastRatio(textColor, bgColor);
+    const finalContrast = fixedColor ? calculateContrastRatio(fixedColor, bgColor) : originalContrast;
+    let deltaEVal = 0;
+    if (fixedColor && pair.text.isValid) {
+      try {
+        const cFixed = new Color(fixedColor);
+        if (cFixed.isValid) {
+          deltaEVal = calculateDeltaE2000(pair.text.rgb, cFixed.rgb);
+        }
+      } catch {
+      }
+    }
     return {
+      color: fixedColor,
       fixedColor,
+      tunedColor: fixedColor,
       success,
+      originalContrast: Math.round(originalContrast * 100) / 100,
+      finalContrast: Math.round(finalContrast * 100) / 100,
+      deltaE: Math.round(deltaEVal * 100) / 100,
+      wcagLevel: getWcagLevel(fixedColor || textColor, bgColor, large),
       isReadable: pair.isReadable,
       pair
     };

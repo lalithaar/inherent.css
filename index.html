@@ -550,14 +550,18 @@ await client.connect();</code></pre>
       const statusEl = document.getElementById('a11y-status');
       const btnEl = document.getElementById('a11y-fix-btn');
 
-      if (result.originalContrast >= 3.0) {
-        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG Compliant (${result.originalContrast}:1 contrast)</strong>`;
+      const tuned = result.color || result.fixedColor || (Array.isArray(result) ? result[0] : null);
+      const origRatio = result.originalContrast !== undefined ? result.originalContrast : (Math.round(window.CMColors.calculateContrastRatio(colorHex, bg) * 100) / 100);
+      const finalRatio = result.finalContrast !== undefined ? result.finalContrast : (tuned ? Math.round(window.CMColors.calculateContrastRatio(tuned, bg) * 100) / 100 : origRatio);
+
+      if (origRatio >= 3.0) {
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG Compliant (${origRatio}:1 contrast)</strong>`;
         btnEl.style.display = 'none';
         suggestedColor = null;
       } else {
-        suggestedColor = result.color;
-        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--danger);">&#9888; Low Contrast (${result.originalContrast}:1 vs 3.0:1 requirement)</strong>`;
-        btnEl.innerText = `Auto-Tune to ${result.color} (${result.finalContrast}:1)`;
+        suggestedColor = tuned;
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--danger);">&#9888; Low Contrast (${origRatio}:1 vs 3.0:1 requirement)</strong>`;
+        btnEl.innerText = `Auto-Tune to ${tuned} (${finalRatio}:1)`;
         btnEl.style.display = 'inline-flex';
       }
     }
