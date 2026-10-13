@@ -1,5 +1,5 @@
 {
-  "name": "inherent-css",
+  "name": "inherent.css",
   "version": "1.0.0",
   "description": "Write plain HTML without adding a single class: get automatic light/dark mode, 1-token color branding, and responsive layouts out of the box.",
   "main": "dist/inherent.css",
@@ -21,7 +21,11 @@
     "responsive",
     "zero-class"
   ],
-  "author": "lalithaar <https://isrl.in/>",
+  "author": {
+    "name": "Lalitha A R",
+    "email": "lalithaar_npmalt.cold549@passinbox.com",
+    "url": "https://isrl.in/"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
