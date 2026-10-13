@@ -77,6 +77,25 @@ Apply `data-theme` to your `<html>` element:
 
 ---
 
+## 🛡️ Optional: Automatic Accessibility Guardian (`autotune.js`)
+
+Inherent.css includes an optional drop-in companion script powered by [`cm-colors`](https://www.npmjs.com/package/cm-colors).
+
+If you (or your users) pick an inaccessible custom theme color (e.g. bright yellow `--theme: #facc15` on white), `autotune.js` silently intercepts it and auto-tunes the CSS custom property on the fly to the closest WCAG-compliant shade (`#b78f00`) with minimal perceptual difference:
+
+```html
+<link rel="stylesheet" href="https://isrl.in/inherent.css/dist/inherent.min.css">
+
+<!-- Drop-in accessibility guardian: auto-tunes failing brand colors silently -->
+<script src="https://isrl.in/inherent.css/dist/autotune.min.js" defer></script>
+```
+
+* **Zero configuration**: Automatically detects `--theme` or `--primary` on `:root`.
+* **Light & Dark Mode Aware**: Seamlessly adapts if the user switches themes or system preferences.
+* **Retinal Self-Defense**: Guarantees your site is always WCAG accessible without writing a single class or calculation.
+
+---
+
 ## Pragmatic App Layouts
 
 When you need real-world app containers, Inherent.css gives you clean, intuitive classes that automatically collapse on mobile (`<= 768px`):
