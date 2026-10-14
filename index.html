@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="indigo">
+<html lang="en" data-theme="neutral">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -99,15 +99,15 @@
       </p>
 
       <div class="cdn-box">
-        <code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent-css/dist/inherent.min.css"&gt;</code>
-        <button type="button" onclick="navigator.clipboard.writeText('<link rel=\'stylesheet\' href=\'https://cdn.jsdelivr.net/npm/inherent-css/dist/inherent.min.css\'>'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000);">Copy</button>
+        <code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent.css/dist/inherent.min.css"&gt;</code>
+        <button type="button" onclick="navigator.clipboard.writeText('<link rel=\'stylesheet\' href=\'https://cdn.jsdelivr.net/npm/inherent.css/dist/inherent.min.css\'>'); this.innerText='Copied!'; setTimeout(() => this.innerText='Copy', 2000);">Copy</button>
       </div>
     </div>
 
     <!-- Live Palette Switcher -->
     <div class="theme-toolbar">
       <strong>Live Theme Palette:</strong>
-      <button type="button" class="theme-chip active" onclick="setTheme('indigo', this)">
+      <button type="button" class="theme-chip" onclick="setTheme('indigo', this)">
         <span class="color-dot" style="background: #6366f1;"></span> Indigo
       </button>
       <button type="button" class="theme-chip" onclick="setTheme('emerald', this)">
@@ -125,19 +125,18 @@
       <button type="button" class="theme-chip" onclick="setTheme('violet', this)">
         <span class="color-dot" style="background: #8b5cf6;"></span> Violet
       </button>
-      <button type="button" class="theme-chip" onclick="setTheme('neutral', this)">
+      <button type="button" class="theme-chip active" onclick="setTheme('neutral', this)">
         <span class="color-dot" style="background: currentColor;"></span> Neutral
       </button>
       <div style="display: inline-flex; align-items: center; gap: 0.4rem; margin-left: auto;">
         <label for="custom-theme-picker" style="font-size: 0.85rem; margin: 0; display: inline-flex; flex-direction: row; align-items: center; gap: 0.4rem;">
           Custom Seed:
-          <input type="color" id="custom-theme-picker" value="#6366f1" onchange="setCustomTheme(this.value)" style="width: 2.2rem; height: 1.8rem; padding: 2px;">
+          <input type="color" id="custom-theme-picker" value="#333333" onchange="setCustomTheme(this.value)" style="width: 2.2rem; height: 1.8rem; padding: 2px;">
         </label>
       </div>
 
       <div id="a11y-panel" style="width: 100%; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border-subtle); display: flex; align-items: center; justify-content: space-between; font-size: 0.85rem; flex-wrap: wrap; gap: 0.5rem;">
-        <span id="a11y-status">Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG AA Compliant</strong></span>
-        <button type="button" id="a11y-fix-btn" style="display: none; padding: 0.25rem 0.65rem; font-size: 0.8rem;" onclick="applyAccessibleFix()">Auto-Tune to Accessible</button>
+        <span id="a11y-status">Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">WCAG AA Compliant</strong></span>
       </div>
     </div>
 
@@ -159,35 +158,34 @@
     <!-- ==================== INTRO ARTICLE ==================== -->
     <article id="overview">
       <header>
-        <h1>Platform Release 4.12 &bull; Regional Overview</h1>
-        <p><small>Unified telemetry, automated scaling, and cross-region consensus monitor.</small></p>
+        <h1>Inherent.css &bull; Default Element Kitchen Sink</h1>
+        <p><small>Semantic HTML elements styled with no classes.</small></p>
       </header>
 
       <p>
-        All core clusters across North American and European availability zones are operating within nominal thresholds. 
-        Automated workload rebalancing has successfully completed across all edge proxies, maintaining consistent 
-        response latency with zero recorded packet drops over the past 48 hours.
+        This page exercises typography, layout, forms, tables, and interactive elements using plain semantic HTML.
+        Adjust <code>--theme</code> or pick a palette above to see every component re-theme instantly.
       </p>
 
       <aside>
-        <strong>Scheduled Maintenance Notice:</strong> Primary cluster database indexing will commence 
-        this Sunday at 03:00 UTC. Secondary read replicas will seamlessly serve all application queries during the operation.
+        <strong>Theme tip:</strong> Set <code>data-theme="emerald"</code> on <code>&lt;html&gt;</code> or change
+        <code>--theme</code> once to update borders, surfaces, focus rings, and hover states everywhere.
       </aside>
 
       <footer>
-        <small>Cluster Status: Healthy &bull; Environment: Production-US-East &bull; Build: #8492</small>
+        <small>Default styles &bull; Semantic HTML &bull; Zero classes</small>
       </footer>
     </article>
 
     <!-- ==================== TOPOLOGY & LAYOUTS ==================== -->
     <section id="topology">
-      <h2>Fleet Overview &amp; Topologies</h2>
-      <p>Multi-zone distribution, capacity projections, and active fleet workloads.</p>
+      <h2>Layouts &amp; Topologies</h2>
+      <p>Cards, shells, grids, and sidebars assembled from semantic elements.</p>
 
-      <h3>Real-time Platform Metrics</h3>
+      <h3>Metric Tiles</h3>
       <div class="grid-4">
         <article style="margin: 0; text-align: center;">
-          <small>Active Workloads</small>
+          <small>Active Items</small>
           <h3 style="margin: 0.25rem 0; color: var(--primary);">14,820</h3>
           <small style="color: var(--success);">&uarr; 18.2% this week</small>
         </article>
@@ -208,29 +206,29 @@
         </article>
       </div>
 
-      <h3 style="margin-top: 2rem;">Service Tiers</h3>
+      <h3 style="margin-top: 2rem;">Cards</h3>
       <div class="grid-3">
         <article style="margin: 0;">
-          <h4>Standard Cluster</h4>
+          <h4>Standard Card</h4>
           <p>Shared compute resources suitable for staging and preview branches.</p>
           <p><strong>$49</strong> / month</p>
           <button type="button" style="width: 100%;">Provision Standard</button>
         </article>
         <article style="margin: 0; border-color: var(--primary);">
-          <h4>Dedicated VPC</h4>
+          <h4>Featured Card</h4>
           <p>Isolated nodes with automated horizontal auto-scaling and priority routing.</p>
           <p><strong>$249</strong> / month</p>
           <button type="submit" style="width: 100%;">Upgrade to Dedicated</button>
         </article>
         <article style="margin: 0;">
-          <h4>Global Enterprise</h4>
+          <h4>Enterprise Card</h4>
           <p>Multi-region active-active replication with custom encryption keys.</p>
           <p><strong>Custom</strong></p>
           <button type="button" style="width: 100%;">Contact Solutions</button>
         </article>
       </div>
 
-      <h3 style="margin-top: 2rem;">Infrastructure Topology</h3>
+      <h3 style="margin-top: 2rem;">Responsive App Layouts</h3>
       <div class="sidebar-left">
         <aside style="margin: 0;">
           <strong>Workspace Navigation</strong>
@@ -245,7 +243,7 @@
 
         <article style="margin: 0;">
           <header>
-            <h4>Primary Ingress Controller</h4>
+            <h4>Sidebar Layout</h4>
             <small>Directing traffic across all European and North American gateway pods.</small>
           </header>
           <p>
@@ -267,11 +265,11 @@
         </article>
       </div>
 
-      <h3 style="margin-top: 2rem;">Workload Configuration Manifest</h3>
+      <h3 style="margin-top: 2rem;">Configuration Manifest</h3>
       <div class="sidebar-right">
         <article style="margin: 0;">
           <header>
-            <h4>Container Specification</h4>
+            <h4>Code Block</h4>
             <small>Active deployment configuration deployed on the primary cluster.</small>
           </header>
           <p>
@@ -291,12 +289,12 @@
         </article>
 
         <aside style="margin: 0; border-inline-start: none; border-inline-end: 4px solid var(--primary); border-radius: var(--radius-md) 0 0 var(--radius-md);">
-          <strong>Cluster Metadata</strong>
+          <strong>Sidebar Metadata</strong>
           <ul style="padding-left: 1.25rem; margin-top: 0.5rem; font-size: var(--font-size-sm);">
-            <li><strong>Active Nodes:</strong> 64 nodes</li>
-            <li><strong>Uptime:</strong> 99.98%</li>
+            <li><strong>Items Demonstrated:</strong> 64</li>
+            <li><strong>Availability:</strong> 99.98%</li>
             <li><strong>Region:</strong> us-east-1a</li>
-            <li><strong>Last Health Check:</strong> Just now</li>
+            <li><strong>Last Updated:</strong> Just now</li>
           </ul>
           <hr style="margin: 1rem 0;">
           <button type="button" style="width: 100%; font-size: var(--font-size-sm);">Download Report</button>
@@ -308,8 +306,8 @@
 
     <!-- ==================== DOCUMENTATION & STANDARDS ==================== -->
     <section>
-      <h2>Operational Standards &amp; Directives</h2>
-      <p>Standard architectural guidelines and runbook specifications.</p>
+      <h2>Typography, Links, and Lists</h2>
+      <p>Default inline elements, hierarchy, and readable prose patterns.</p>
 
       <h1>Header Section Alpha</h1>
       <h2>Header Section Beta</h2>
@@ -349,8 +347,8 @@ await client.connect();</code></pre>
 
     <!-- ==================== PROVISIONING ==================== -->
     <section id="provisioning">
-      <h2>Resource Provisioning &amp; Credentials</h2>
-      <p>Submit cluster provisioning parameters and assign resource allocations.</p>
+      <h2>Forms &amp; Controls</h2>
+      <p>Accessibility-friendly inputs, buttons, selects, and validation states.</p>
 
       <form onsubmit="event.preventDefault();">
         <fieldset>
@@ -420,7 +418,7 @@ await client.connect();</code></pre>
         </fieldset>
 
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
-          <button type="submit">Deploy Cluster</button>
+          <button type="submit">Submit</button>
           <button type="button">Save Draft</button>
           <button type="reset">Clear Form</button>
           <button type="button" disabled>Decommission (Locked)</button>
@@ -432,42 +430,42 @@ await client.connect();</code></pre>
 
     <!-- ==================== TELEMETRY ==================== -->
     <section id="telemetry">
-      <h2>Regional Node Capacities</h2>
+      <h2>Tables &amp; Data</h2>
 
       <table>
-        <caption>Regional Infrastructure Node Distribution</caption>
+        <caption>Sample regional infrastructure node distribution</caption>
         <thead>
           <tr>
-            <th>Cluster Name</th>
+            <th>Item Name</th>
             <th>Region</th>
             <th>Provisioned Nodes</th>
-            <th>Health Status</th>
+            <th>State</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><code>helios-east-01</code></td>
+            <td><code>item-east-01</code></td>
             <td>us-east-1 (N. Virginia)</td>
             <td>64</td>
-            <td>Nominal</td>
+            <td>Ready</td>
           </tr>
           <tr>
-            <td><code>helios-west-02</code></td>
+            <td><code>item-west-02</code></td>
             <td>us-west-2 (Oregon)</td>
             <td>32</td>
-            <td>Nominal</td>
+            <td>Ready</td>
           </tr>
           <tr>
-            <td><code>helios-eu-01</code></td>
+            <td><code>item-eu-01</code></td>
             <td>eu-central-1 (Frankfurt)</td>
             <td>48</td>
-            <td>Nominal</td>
+            <td>Ready</td>
           </tr>
           <tr>
-            <td><code>helios-ap-01</code></td>
+            <td><code>item-ap-01</code></td>
             <td>ap-south-1 (Mumbai)</td>
             <td>24</td>
-            <td>Nominal</td>
+            <td>Ready</td>
           </tr>
         </tbody>
         <tfoot>
@@ -479,7 +477,7 @@ await client.connect();</code></pre>
       </table>
 
       <h3>Capacity Indicators</h3>
-      <p>Overall Cluster Saturation:</p>
+      <p>Overall Progress:</p>
       <progress value="68" max="100"></progress>
 
       <p style="margin-top: 1rem;">Resource Utilization Meters:</p>
@@ -494,10 +492,10 @@ await client.connect();</code></pre>
 
     <!-- ==================== ACTIONS & DIALOGS ==================== -->
     <section id="actions">
-      <h2>Operational Actions</h2>
+      <h2>Dialogs &amp; Interactive Elements</h2>
 
       <details open>
-        <summary>Automated Backup Schedules</summary>
+        <summary>Expandable Disclosure</summary>
         <p>Snapshots are persisted incrementally every 6 hours across secondary object storage tiers with 30-day retention.</p>
       </details>
 
@@ -528,7 +526,7 @@ await client.connect();</code></pre>
     </p>
   </footer>
 
-  <script src="dist/cm-colors.global.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cm-colors/dist/cm-colors.global.js"></script>
   <script>
     const themeColors = {
       indigo: '#6366f1',
@@ -548,21 +546,25 @@ await client.connect();</code></pre>
       const bg = '#ffffff'; // check against standard light canvas
       const result = window.CMColors.makeReadable(colorHex, bg, { large: true });
       const statusEl = document.getElementById('a11y-status');
-      const btnEl = document.getElementById('a11y-fix-btn');
 
       const tuned = result.color || result.fixedColor || (Array.isArray(result) ? result[0] : null);
       const origRatio = result.originalContrast !== undefined ? result.originalContrast : (Math.round(window.CMColors.calculateContrastRatio(colorHex, bg) * 100) / 100);
       const finalRatio = result.finalContrast !== undefined ? result.finalContrast : (tuned ? Math.round(window.CMColors.calculateContrastRatio(tuned, bg) * 100) / 100 : origRatio);
 
+      let autoTuning = window.__inherentAutoTuning === true;
       if (origRatio >= 3.0) {
-        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">&#10003; WCAG Compliant (${origRatio}:1 contrast)</strong>`;
-        btnEl.style.display = 'none';
+        window.__inherentAutoTuning = false;
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--success);">WCAG AA Compliant (${origRatio}:1 contrast)</strong>`;
         suggestedColor = null;
       } else {
         suggestedColor = tuned;
-        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--danger);">&#9888; Low Contrast (${origRatio}:1 vs 3.0:1 requirement)</strong>`;
-        btnEl.innerText = `Auto-Tune to ${tuned} (${finalRatio}:1)`;
-        btnEl.style.display = 'inline-flex';
+        if (!autoTuning && tuned && tuned.toLowerCase() !== colorHex.toLowerCase()) {
+          window.__inherentAutoTuning = true;
+          applyAccessibleFix();
+          window.__inherentAutoTuning = false;
+          return;
+        }
+        statusEl.innerHTML = `Accessibility Engine (via <code>cm-colors</code>): <strong style="color: var(--danger);">Low Contrast (${origRatio}:1 vs 3.0:1 requirement)</strong>`;
       }
     }
 
@@ -593,7 +595,7 @@ await client.connect();</code></pre>
 
     // Initial check
     window.addEventListener('DOMContentLoaded', () => {
-      checkContrastForColor('#6366f1');
+      checkContrastForColor('#333333');
     });
   </script>
 </body>

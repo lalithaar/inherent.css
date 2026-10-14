@@ -12,7 +12,7 @@
 
 ## Why Inherent.css?
 
-Almost every modern CSS solution demands hundreds of utility classes or delivers bloated 100KB bundles soaked in generic neon-purple AI gradients.
+Inherent.css styles semantic HTML by default, with automatic light/dark mode and one-token color branding in a small CSS footprint.
 
 **Inherent.css** returns to first principles: **plain HTML elements should look like polished, responsive software by default.**
 
@@ -30,21 +30,60 @@ Almost every modern CSS solution demands hundreds of utility classes or delivers
 Paste this into your `<head>` and start writing plain HTML:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent-css/dist/inherent.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent.css/dist/inherent.min.css">
 ```
 
 ### 2. Via NPM
 ```bash
-npm install inherent-css
+npm install inherent.css
 ```
 
 Import it in your CSS or JavaScript entrypoint:
 ```css
-@import "inherent-css";
+@import "inherent.css";
 ```
 ```js
-import "inherent-css/dist/inherent.min.css";
+import "inherent.css/dist/inherent.min.css";
 ```
+
+---
+
+## Usage
+
+### Via CDN (Drop-in)
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent.css/dist/inherent.min.css">
+```
+
+### Via npm
+```bash
+npm install inherent.css
+```
+```css
+@import "inherent.css";
+```
+```js
+import "inherent.css/dist/inherent.min.css";
+```
+
+### Static Theme Override (No JavaScript / No Build Tools)
+If you want a custom brand color without runtime tuning, define it yourself:
+
+```css
+:root { --theme: #facc15; }
+```
+
+Include this override after Inherent.css. For WCAG tuning, either choose an accessible color or load the optional runtime script below.
+
+### Runtime Accessibility Guardian (Optional)
+```html
+<script src="https://cdn.jsdelivr.net/npm/inherent.css/dist/autotune.min.js" defer></script>
+```
+
+### Theme Switching
+- Default theme: Neutral
+- Presets: `data-theme="emerald"`, `rose`, `amber`, `cyan`, `violet`, `neutral`, `indigo`
+- Or override one token: `:root { --theme: #10b981; }`
 
 ---
 
@@ -79,15 +118,17 @@ Apply `data-theme` to your `<html>` element:
 
 ## 🛡️ Optional: Automatic Accessibility Guardian (`autotune.js`)
 
-Inherent.css includes an optional drop-in companion script powered by [`cm-colors`](https://www.npmjs.com/package/cm-colors).
+Inherent.css includes an optional drop-in companion script powered by [`cm-colors`](https://www.npmjs.com/package/cm-colors). When installing via npm, `cm-colors` is included automatically; CDN users can load its global bundle alongside the script below.
+
+If you would rather avoid runtime JavaScript, use the static override approach shown in Usage: define `:root { --theme: #facc15; }` with an accessible color, or run any external tuner you prefer.
 
 If you (or your users) pick an inaccessible custom theme color (e.g. bright yellow `--theme: #facc15` on white), `autotune.js` silently intercepts it and auto-tunes the CSS custom property on the fly to the closest WCAG-compliant shade (`#b78f00`) with minimal perceptual difference:
 
 ```html
-<link rel="stylesheet" href="https://isrl.in/inherent.css/dist/inherent.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/inherent.css/dist/inherent.min.css">
 
 <!-- Drop-in accessibility guardian: auto-tunes failing brand colors silently -->
-<script src="https://isrl.in/inherent.css/dist/autotune.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/inherent.css/dist/autotune.min.js" defer></script>
 ```
 
 * **Zero configuration**: Automatically detects `--theme` or `--primary` on `:root`.
@@ -150,4 +191,7 @@ Check out the interactive playground with live theme switching at:
 
 ## License
 
-MIT &copy; 2026 [lalithaar](https://isrl.in/)
+Inherent.css is released under the MIT License.
+
+Core CSS: MIT.
+Optional accessibility guardian (`autotune`): MIT, using color-science code under the author's explicit permission. See `NOTICE`.

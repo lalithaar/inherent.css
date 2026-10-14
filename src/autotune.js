@@ -10,7 +10,7 @@
  * @author Lalitha A R <https://isrl.in/>
  */
 
-import { makeReadable, calculateContrastRatio } from "../../cm-colors/src/index.js";
+import { makeReadable, calculateContrastRatio } from "cm-colors";
 
 function getActiveBackgroundColor() {
   const isDark =
